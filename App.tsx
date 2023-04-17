@@ -7,13 +7,8 @@
 
 import "react-native-get-random-values";
 import React from "react";
-import type { PropsWithChildren } from "react";
 import {
   Button,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Text,
   useColorScheme,
 } from "react-native";
 
@@ -25,25 +20,14 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import { bookContext } from "./app/realm";
 import { BooksList } from "./app/views/BooksList";
 import { AddBook } from "./app/views/AddBook";
+import { ViewBook } from "./app/views/ViewBook";
 const { RealmProvider } = bookContext;
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === "dark";
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
-    // <SafeAreaView style={backgroundStyle}>
-    //   <StatusBar
-    //     barStyle={isDarkMode ? "light-content" : "dark-content"}
-    //     backgroundColor={backgroundStyle.backgroundColor}
-    //   />
-    //   <BooksList />
-    // </SafeAreaView>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Books List">
         <Stack.Screen
@@ -61,6 +45,7 @@ function App(): JSX.Element {
           })}
         />
         <Stack.Screen name="Add Book" component={AddBook} />
+        <Stack.Screen name="View Book" component={ViewBook} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -75,6 +60,3 @@ const AppWrapper = () => {
 };
 
 export default AppWrapper;
-
-type RootStackParamList = {
-};

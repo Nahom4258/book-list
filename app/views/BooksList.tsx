@@ -6,7 +6,7 @@ import { BookItem } from "./BookItem";
 import { Realm } from "@realm/react";
 const { useQuery, useRealm } = bookContext;
 
-export const BooksList = () => {
+export const BooksList = ({ navigation }) => {
   const books = useQuery(Book);
   const realm = useRealm();
 
@@ -54,7 +54,9 @@ export const BooksList = () => {
       </View> */}
       <FlatList
         data={books}
-        renderItem={({ item }) => <BookItem book={item} />}
+        renderItem={({ item }) => (
+          <BookItem navigation={navigation} book={item} />
+        )}
       />
     </View>
   );

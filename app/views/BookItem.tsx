@@ -1,13 +1,24 @@
 import React from "react";
 
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Pressable } from "react-native";
 import { Book } from "../realm";
 import Realm from "realm";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-export const BookItem = ({ book }: { book: Book & Realm.Object }) => {
+export const BookItem = ({
+  book,
+  navigation,
+}: {
+  book: Book & Realm.Object;
+  navigation: any;
+}) => {
+  const navigateToDetails = () => {
+    navigation.navigate('View Book', {
+      book: book
+    })
+  };
+
   return (
-    <View
+    <Pressable
       style={{
         margin: 5,
         padding: 20,
@@ -16,13 +27,12 @@ export const BookItem = ({ book }: { book: Book & Realm.Object }) => {
         borderWidth: 1,
         borderRadius: 10,
       }}
+      onPress={navigateToDetails}
     >
       <Text style={{ fontSize: 24, fontWeight: "bold", color: "black" }}>
         {book.title}
       </Text>
       <Text style={{ fontSize: 18, marginVertical: 5 }}>{book.author}</Text>
-    </View>
+    </Pressable>
   );
 };
-
-// type Props = NativeStackScreenProps<RootStackParamList, 'Profile', 'MyStack'>;
